@@ -1,4 +1,9 @@
+# **E-commerce Customer Analytics: Predicting Churn**
+### Created By : Fauzi Achmad, Hilmi Tito, M Rizky Bayu Aji
+
 Overview Project
+
+## Business Problem Understanding
 **Context**  
 Dalam dunia e-commerce yang sangat kompetitif, **e-commerce** Alpha, sebuah platform yang baru didirikan, berupaya menganalisis perilaku pelanggan untuk meningkatkan retensi pelanggan. Dalam banyak penelitian bisnis dan literatur pemasaran, terdapat konsensus umum bahwa biaya untuk mendapatkan pelanggan baru jauh lebih tinggi dibandingkan dengan biaya untuk mempertahankan pelanggan lama. Sering disebut sebagai prinsip "Customer Retention vs. Acquisition", perbandingan ini sangat relevan terutama di industri e-commerce, SaaS, dan layanan berlangganan.
 
@@ -96,3 +101,103 @@ Model digunakan setiap akhir bulan untuk menganalisa potensi customer churn. Lim
 | OrderCount | Total number of orders has been places in last month |
 | DaySinceLastOrder | Day Since last order by customer |
 | CashbackAmount | Average cashback in last month |
+
+
+**Limitasi**
+
+
+Model bisa memprediksi churn berdasarkan definisi churn diatas 6 bulan, menggunakan terutama 10 parameter terbaik dengan batasan/limit sbb:
+
+1. Tenure: 0 sd 31 month
+2. Cashback amount: 37 sd 324 Rupiah
+3. Warehouse to home: 5 sd 36 KM
+4. Complain: customer yang ada dan tidak ada kompalain
+5. Number of Adress: 1 sd 11
+6. Order Amount Hike from last Year: 11% sd 26%
+7. Satisfaction Score: 1 sd 5
+8. Preferred payment mode: Virtual account, ewallet, debit card, credit card dab CoD.
+9. Marital Status: Single, Married dan Divorced
+10. Number of device registered: 1 sd 6 device
+
+### Error Analytics
+
+
+Dari hasil analisis error pada variabel Actual dan Predicted, terlihat bahwa model salah memprediksi sejumlah besar data. Berikut adalah beberapa poin penting dari analisis terhadap fitur-fitur yang paling berkontribusi terhadap kesalahan prediksi:
+
+- Feature Tenure:
+
+Tenure tertinggi yang salah diprediksi adalah 1.0 dengan jumlah 72, diikuti oleh 0.0 sebanyak 40. Hal ini menunjukkan bahwa pengguna dengan masa aktif yang sangat pendek (Tenure rendah) sering salah diprediksi oleh model, kemungkinan karena perilaku pengguna baru yang berbeda dengan pengguna lama belum cukup terdeteksi dengan baik oleh model.
+- Feature PreferredLoginDevice:
+
+Pengguna yang menggunakan perangkat login tertentu, khususnya kategori 1 atau Mobile Phone (dengan 123 kasus), tampaknya lebih sering salah diprediksi. Perangkat login mungkin memengaruhi pola penggunaan yang tidak sepenuhnya dikenali oleh model, sehingga perlu analisis lebih lanjut untuk mengidentifikasi device-specific behavior.
+- Feature CityTier:
+
+Salah prediksi paling banyak terjadi di CityTier 1 dan 3, yang mencakup kota besar dan kota menengah. Ini mengindikasikan kemungkinan adanya perbedaan perilaku belanja yang tidak sepenuhnya dimodelkan, seperti aksesibilitas ke layanan atau preferensi pengguna yang bervariasi berdasarkan lokasi.
+- Feature WarehouseToHome:
+
+Pengiriman dari jarak tertentu seperti 9.0 (dengan 35 kesalahan) sering salah diprediksi. Hal ini bisa menunjukkan ketidaktepatan model dalam mengakomodasi dampak jarak pengiriman terhadap perilaku pembelian atau kepuasan pengguna.
+- Feature PreferredPaymentMode:
+
+Pembayaran yang paling sering salah diprediksi adalah mode pembayaran dengan kode 2 dan 1 atau Debit Card dan Credit Card. Mungkin ada bias yang belum sepenuhnya dimengerti model terkait pilihan pembayaran ini, misalnya, apakah diskon atau cashback lebih sering memicu pembelian berulang.
+- Feature HourSpendOnApp:
+
+Pengguna yang menghabiskan 3 jam di aplikasi (110 kesalahan) tampaknya sering salah diprediksi. Ini menunjukkan bahwa durasi penggunaan aplikasi mungkin memiliki pola perilaku yang rumit, dan mungkin perlu eksplorasi lebih lanjut mengenai aktivitas selama waktu tersebut.
+- Feature NumberOfDeviceRegistered:
+
+Registrasi perangkat terbanyak di kategori 4 (80 kasus) menunjukkan kesalahan prediksi yang cukup besar. Ini mungkin mengindikasikan bahwa pengguna dengan banyak perangkat memiliki pola interaksi yang kompleks atau berbeda dari rata-rata pengguna.
+- Feature SatisfactionScore:
+
+Skor kepuasan 3 (65 kasus) sering salah diprediksi. Hal ini menunjukkan bahwa pengguna dengan tingkat kepuasan sedang cenderung memiliki perilaku yang sulit ditebak oleh model, mungkin karena mereka berada di titik peralihan antara puas dan tidak puas.
+- Feature Complain:
+
+Jumlah kesalahan prediksi cukup merata antara yang memiliki komplain dan tidak. Ini menandakan bahwa model mungkin kurang sensitif terhadap indikasi ketidakpuasan yang diwakili oleh variabel komplain.
+- Feature OrderAmountHikeFromlastYear:
+
+Peningkatan jumlah order tertinggi pada angka 14.0 dan 12.0 menunjukkan kesalahan signifikan, menunjukkan bahwa model kesulitan memprediksi pengguna dengan perubahan pola pembelian yang signifikan dibandingkan tahun sebelumnya.
+- Feature CouponUsed:
+
+Penggunaan kupon 1.0 (83 kasus) menjadi sumber kesalahan terbesar, mungkin karena dampak promosi yang belum diantisipasi secara tepat dalam model prediksi.
+- Feature Actual dan Predicted:
+
+Kesalahan prediksi terutama terjadi pada pengguna yang sebenarnya Churn (Actual 1) tetapi diprediksi tidak Churn (Predicted 0), sebanyak 145 kasus. 
+
+
+Analisis error ini menunjukkan bahwa fitur-fitur seperti Tenure, PreferredLoginDevice, dan jarak pengiriman dari gudang ke rumah memiliki pengaruh signifikan terhadap kesalahan prediksi. Akan tetapi, model ini hanya mengalami kesalahan 181 dari 1076. Pendekatan yang lebih baik untuk menangani variabel-variabel ini, misalnya dengan memasukkan fitur tambahan atau menggunakan algoritma yang lebih kompleks, dapat membantu mengurangi kesalahan prediksi model.
+
+# Conclusion & Recommendation
+
+Berdasarkan hasil classification report dari model RF yang sudah dituning, kita dapat menyimpulkan bahwa jika model ini digunakan untuk menyaring pelanggan yang mungkin akan churn, maka model ini dapat mengurangi 99% pelanggan yang tidak akan churn untuk tidak kita beri perhatian lebih (berdasarkan recall untuk kelas 0.0). Selain itu, model ini juga dapat mengidentifikasi 79% dari seluruh pelanggan yang benar-benar akan churn (berdasarkan recall untuk kelas 1.0).
+
+Ketepatan prediksi model kita untuk pelanggan yang akan churn adalah 97% (precision untuk kelas 1.0), yang berarti setiap kali model memprediksi bahwa seorang pelanggan akan churn, sekitar 97% prediksi tersebut benar. Namun, perlu dicatat bahwa ada sekitar 1% dari pelanggan yang tidak akan churn namun diprediksi oleh model sebagai pelanggan yang akan churn, yang dapat mempengaruhi efisiensi strategi retensi.
+
+Secara keseluruhan, model ini memiliki akurasi sebesar 96%, dan performanya dapat dilihat dari weighted average f1-score sebesar 96%, menunjukkan bahwa model seimbang dalam menangani kedua kelas, meskipun ada peluang untuk peningkatan lebih lanjut, khususnya dalam mengurangi kesalahan prediksi untuk pelanggan yang tidak akan churn.
+
+
+Dari Context diperoleh bahwa
+- Marketplace besar di Indonesia memiliki CAC yang lebih rendah, di kisaran Rp 100.000 hingga Rp 300.000 per pelanggan.
+- Marketplace kecil atau niche cenderung memiliki CAC yang lebih tinggi, yaitu sekitar Rp 300.000 hingga Rp 1.000.000 per pelanggan.
+- Untuk strategi organik, CAC bisa diturunkan ke Rp 50.000 hingga Rp 150.000 jika kampanye pemasaran organik dijalankan dengan baik.
+
+Bila seandainya biaya untuk screening/menyaring data per kandidat itu Rp 300.000, dan andaikan jumlah pelanggan yang kita miliki untuk suatu kurun waktu sebanyak 200 orang (dimana andaikan 100 orang akan Churn, dan 100 orang tidak akan Churn), maka hitungannya kurang lebih akan seperti ini :
+
+Tanpa Model (semua kandidat diperiksa dan ditawarkan):
+
+- Total Biaya => 200 x Rp 300.000 = Rp 60.000.000
+- Total Pelanggan yang akan Churn => 100 orang (karena semua ditawarkan)
+- Total Pelanggan yang akan Tidak Churn => 0 orang (karena semua ditawarkan)
+- Biaya yang Terbuang => 100 x Rp 300.000 = Rp 30.000.000 (karena 100 orang Churn dan menjadi sia-sia)
+- Jumlah Penghematan => Rp 0
+Dengan Model (hanya pelanggan yang diprediksi Churn (100) oleh model yang diperiksa dan ditawarkan):
+
+- Total Biaya => (79 x Rp 300.000) + (1 x Rp 300.000) = Rp 23.700.000 + Rp 300.000 = Rp 24.000.000
+- Total Pelanggan yang akan Churn => 79 orang (berdasarkan recall untuk kelas churn yaitu 79%)
+- Total Pelanggan yang akan Tidak Churn => 21 orang (karena recall untuk kelas non churn adalah 79%)
+- Biaya yang Terbuang => 1 x Rp 300.000 = Rp 300.000 (berdasarkan recall untuk kelas non churn, sebanyak 1 orang yang tidak Churn tetapi tetap ditawarkan)
+- Jumlah Penghematan => 100 x Rp 300.000 - Rp 300.000 = Rp 29.700.000
+
+Berdasarkan contoh hitungan tersebut, terlihat bahwa dengan menggunakan model prediksi, perusahaan akan dapat menghemat biaya yang signifikan tanpa mengorbankan banyak jumlah pelanggan Tidak Churn. Model ini membantu dalam menyaring pelanggan dengan lebih efisien, mengurangi biaya yang terbuang karena menawarkan pada pelanggan yang tidak tertarik, dan secara keseluruhan meningkatkan efektivitas strategi pemasaran.
+#### Recommendation
+Hal-hal yang bisa dilakukan untuk mengembangkan project dan modelnya lebih baik lagi :
+- Menambahkan fitur-fitur atau kolom baru yang berpotensi berkaitan dengan ketertarikan pelanggan terhadap produk, seperti jumlah biaya transaksi, parameter demografi, dan lainnya, untuk memperkaya analisis dan meningkatkan akurasi prediksi model.
+- Mencoba algorithm ML yang lain terutama neural network, mencoba hyperparameter tuning kembali, dan menggunakan metode Grid Search untuk tuning, serta coba gunakan teknik oversampling yang berbeda juga selain Random Over Sampling, seperti SMOTENC, dll.
+- Menganalisa data-data yang model kita masih salah tebak lebih dalam untuk mengetahui alasannya dan karakteristiknya bagaimana.
