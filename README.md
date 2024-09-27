@@ -72,3 +72,27 @@ Kemudian kita akan membangun model klasifikasi yang akan membantu perusahaan unt
 User dari penggunaan model dan solusi data analytics ini adalah Customer Relationship Division, e.g Division Head, Marketing/Relationship Manager agar dapat membantu dalam menentukan strategi yang tepat untuk mengurangi churn dengan biaya yang optimal.
 
 Model digunakan setiap akhir bulan untuk menganalisa potensi customer churn. Limitasi dari model adalah adanya kriteria churn customer yang tidak membeli ulang diatas 6 bulan, serta prediktif parameter yang terbatas pada parameter terpilih pada model kami dengan variasi eksisting. (apabila ada parameter atau variasi baru model belum bisa memprediksi sepenuhnya atau belum memperhitungkan parameter tersebut). 
+
+**Data Understanding**
+| Attribute | Description |
+| --- |  --- |
+| CustomerID | Unique customer ID |
+| Churn | Churn Flag |
+| Tenure | Tenure of customer in organization |
+| PreferredLoginDevice | Preferred login device of customer |
+| CityTier | City tier |
+| WarehouseToHome | Distance in between warehouse to home of customer |
+| PreferredPaymentMode | Preferred payment method of customer |
+| Gender | Gender of customer |
+| HourSpendOnApp | Number of hours spend on mobile application or website |
+| NumberOfDeviceRegistered | Total number of deceives is registered on particular customer |
+| PreferedOrderCat | Preferred order category of customer in last month |
+| SatisfactionScore | Satisfactory score of customer on service |
+| MaritalStatus | Marital status of customer |
+| NumberOfAddress | Total number of added added on particular customer |
+| Complain | Any complaint has been raised in last month |
+| OrderAmountHikeFromlastYear | Percentage increases in order from last year |
+| CouponUsed | Total number of coupon has been used in last month |
+| OrderCount | Total number of orders has been places in last month |
+| DaySinceLastOrder | Day Since last order by customer |
+| CashbackAmount | Average cashback in last month |
