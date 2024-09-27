@@ -193,7 +193,7 @@ Dengan Model (hanya pelanggan yang diprediksi Churn (100) oleh model yang diperi
 - Total Pelanggan yang akan Churn => 79 orang (berdasarkan recall untuk kelas churn yaitu 79%)
 - Total Pelanggan yang akan Tidak Churn => 21 orang (karena recall untuk kelas non churn adalah 79%)
 - Biaya yang Terbuang => 1 x Rp 300.000 = Rp 300.000 (berdasarkan recall untuk kelas non churn, sebanyak 1 orang yang tidak Churn tetapi tetap ditawarkan)
-- Jumlah Penghematan => 100 x Rp 300.000 - Rp 300.000 = Rp 29.700.000
+- Jumlah Penghematan: Perhitungan penghematan dihitung sebagai selisih antara biaya tanpa model dan dengan model => Rp60.000.000−Rp24.000.000=Rp36.000.000
 
 Berdasarkan contoh hitungan tersebut, terlihat bahwa dengan menggunakan model prediksi, perusahaan akan dapat menghemat biaya yang signifikan tanpa mengorbankan banyak jumlah pelanggan Tidak Churn. Model ini membantu dalam menyaring pelanggan dengan lebih efisien, mengurangi biaya yang terbuang karena menawarkan pada pelanggan yang tidak tertarik, dan secara keseluruhan meningkatkan efektivitas strategi pemasaran.
 #### Recommendation
