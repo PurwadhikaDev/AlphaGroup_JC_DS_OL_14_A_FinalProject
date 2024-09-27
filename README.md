@@ -201,3 +201,7 @@ Hal-hal yang bisa dilakukan untuk mengembangkan project dan modelnya lebih baik 
 - Menambahkan fitur-fitur atau kolom baru yang berpotensi berkaitan dengan ketertarikan pelanggan terhadap produk, seperti jumlah biaya transaksi, parameter demografi, dan lainnya, untuk memperkaya analisis dan meningkatkan akurasi prediksi model.
 - Mencoba algorithm ML yang lain terutama neural network, mencoba hyperparameter tuning kembali, dan menggunakan metode Grid Search untuk tuning, serta coba gunakan teknik oversampling yang berbeda juga selain Random Over Sampling, seperti SMOTENC, dll.
 - Menganalisa data-data yang model kita masih salah tebak lebih dalam untuk mengetahui alasannya dan karakteristiknya bagaimana.
+
+
+Untuk dashboard e-commerce, bisa diakses pada link dibawah ini:
+https://public.tableau.com/views/Final_Project_ecommerce_Alpha/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
